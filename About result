@@ -1,0 +1,9 @@
+you can see my prediction on market_share_predict.csv .
+at first i should train a model with train dataset for that i need to do preprocessing that i should use some metrics and tools like
+visualization tools and mean and std .
+and i should imputation some variable and drop some of them.
+after that our data ready for train .
+i use some method that i can use for predicting continuous response variable.
+after that I have to evaluate modeles and choose best of them. for this i use MAE MSE Accuracy R-square.
+after choose the best model we can use that for predicting test dataset set.
+before that we need to preprocess test dataset.
