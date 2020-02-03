@@ -177,21 +177,28 @@ boostr = AdaBoostRegressor()
 for method in [huber,ridge,linearreg,detr,boostr]:
     method.fit(X_train,y_train)
     print(str(method),method.score(X_train,y_train))
-
-## fit the model
+    
+    
+## findung the best depth for method
+for i in range(1,200,5):
+    detr = DecisionTreeRegressor(max_depth=i)
+    detr.fit(X_train, y_train)
+    yhattrain = detr.predict(X_train)
+    yhattest = detr.predict(X_test)
+    mae_train = mean_absolute_error(y_train, yhattrain)
+    mae_test = mean_absolute_error(y_test, yhattest)
+    R_squre_train = r2_score(y_train, yhattrain)
+    R_squre_test = r2_score(y_test, yhattest)
+    print("max_depth:",i , "R_squre_train:", R_squre_train,"R_squre_test:",R_squre_test )
+## fit model
+detr = DecisionTreeRegressor(max_depth=16)
 detr.fit(X_train, y_train)
-
-## metrics
-
-yhattrain =  detr.predict(X_train)
+yhattrain = detr.predict(X_train)
 yhattest = detr.predict(X_test)
-
-mae_train = mean_absolute_error(y_train , yhattrain)
-mae_test = mean_absolute_error(y_test , yhattest)
-
-R_squre_train = r2_score(y_train,yhattrain)
-R_squre_test = r2_score(y_test,yhattest)
-
+mae_train = mean_absolute_error(y_train, yhattrain)
+mae_test = mean_absolute_error(y_test, yhattest)
+R_squre_train = r2_score(y_train, yhattrain)
+R_squre_test = r2_score(y_test, yhattest)
 
 test["market_share_predict"] = detr.predict(test)
 
